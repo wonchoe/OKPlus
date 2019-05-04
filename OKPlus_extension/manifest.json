@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+    "update_url": "https://clients2.google.com/service/update2/crx",
+    "name": "OKPlus",
+    "version": "0.0.0.1", 
+    "description": "Дополнение к социальным сетям в виде блока красивого виджета погоды", 
+    "permissions": ["tabs", "geolocation", "storage", "activeTab"],	
+    "icons": {
+        "128": "icons/icon_128.png",
+        "48": "icons/icon_48.png",
+        "32": "icons/icon_32.png",
+        "16": "icons/icon_16.png"
+    },
+    "browser_action": {
+        "default_icon": "icons/icon.png",
+        "default_title": "Настройки",
+        "default_popup": "popup.html"
+    },		
+    "background": {
+        "scripts": ["background.js", "jquery-3.4.0.min.js"]
+    }, 
+    "content_scripts": [{
+            "js": ["jquery-3.4.0.min.js", "main.js"],
+            "matches": ["*://*.rixnews.com/*", "*://*.ok.ru/*"],
+            "run_at": "document_start"
+        }],
+    "web_accessible_resources": ["/icons/weather/*"]
+}
+ 
