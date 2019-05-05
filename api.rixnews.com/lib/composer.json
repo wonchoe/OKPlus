@@ -1,0 +1,6 @@
+{
+    "require": {
+        "jalle19/php-yui-compressor": "^1.0",
+        "firebase/php-jwt": "^5.0"
+    }
+}
