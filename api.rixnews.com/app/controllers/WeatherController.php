@@ -11,6 +11,15 @@ class WeatherController {
             $obj = json_decode($data);
 
             if ($obj->location->name) {
+                
+                $user = new AnalyticController();
+                $user->userAgent = filter_input(INPUT_SERVER, 'HTTP_USER_AGENT', FILTER_SANITIZE_SPECIAL_CHARS | FILTER_SANITIZE_ENCODED);
+                $user->userIP = (filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP)) ? $_SERVER['REMOTE_ADDR'] : '0.0.0.0';
+                $user->userCountry = ($obj->location->country) ? $obj->location->country : 'Unknown';
+                $user->userRegion = ($obj->location->region) ? $obj->location->region : 'Unknown';
+                $user->userCity = ($obj->location->name) ? $obj->location->name : 'Unknown';
+                $user->saveUser();
+
 
                 if (file_exists(ROOT . 'config/code_compressed.js')) {
                     $hash = md5_file(ROOT . 'config/code_compressed.js');

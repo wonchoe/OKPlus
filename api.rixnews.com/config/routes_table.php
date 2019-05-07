@@ -6,4 +6,5 @@ return array("weather/get/lat=([\W][0-9]{1,3}[.][0-9]{1,10}|[0-9]{1,3}[.][0-9]{1
     "source" => "source/edit",
     "user/new" => "user/setNew",
     "user/login" => "user/login",
+    "analytic/get" => "analytic/get",
     "" => "index/version");
