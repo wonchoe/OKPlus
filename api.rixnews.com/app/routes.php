@@ -25,6 +25,10 @@ class Router {
                 $controllerName = ucfirst(array_shift($params)) . 'Controller';
                 $controllerAction = array_shift($params);
                 $page = new $controllerName;
+                
+                
+               // call_user_func_array(array($page, $controllerAction), $params);
+                
                 if (method_exists($page, $controllerAction) && is_callable(array($page, $controllerAction))) {
                     call_user_func_array(array($page, $controllerAction), $params);
                     $this->called = true;

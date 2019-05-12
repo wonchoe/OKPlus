@@ -41,17 +41,17 @@ class UserController {
                 return false;
     }
 
-    private function generateGWT(string $user = ''){
-                        $token = array(
-                            "iss" => "http://api.rixnews.com",
-                            "aud" => "http://api.rixnews.com",
-                            "iat" => time(),
-                            "nbf" => time(),
-                            "username" => $user
-                        );
-                        return JWT::encode($token, SECRET_KEY);        
+    private function generateGWT(string $user = '') {
+        $token = array(
+            "iss" => "http://api.rixnews.com",
+            "aud" => "http://api.rixnews.com",
+            "iat" => time(),
+            "nbf" => time(),
+            "username" => $user
+        );
+        return JWT::encode($token, SECRET_KEY);
     }
-    
+
     public function login() {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -71,7 +71,6 @@ class UserController {
     }
 
     public function setNew() {
-        // var_dump(file_get_contents('php://input'));
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = json_decode(file_get_contents('php://input'));
             $errors = array();
@@ -95,7 +94,7 @@ class UserController {
                 echo json_encode($errors);
                 return;
             }
-            
+
             echo json_encode(array('JWT' => $this->generateGWT()));
             //echo user::addUser($username, $email, $password);
         }
