@@ -73,6 +73,15 @@
 
             $().ready(function () {
 
+                $('form').each(function () {
+                    $(this).find('input').keypress(function (e) {
+                        if (e.which == 10 || e.which == 13) {
+                            $('#loginForm').is(':visible') ? $('#buttonLogin').click() : $('#buttonRegister').click();
+                        }
+                    });
+                });
+
+
                 $('#loader-1').hide();
                 $(document).ajaxStart(function () {
                     $('#loader-1').show();
@@ -118,7 +127,7 @@
                             {
                                 setCookie('JWT', data.JWT, 1);
                                 localStorage.setItem('JWT', data.JWT);
-                                location.href = '/source/edit';
+                                location.href = '/dashboard';
                             } else {
                                 $('input').addClass('inputError');
                             }
@@ -138,6 +147,7 @@
                         contentType: 'application/json; charset=utf-8',
                         dataType: 'json',
                         success: function (data) {
+                            console.log('data: '+data.JWT);
                             $.each(data, function (key, value) {
                                 if (!value)
                                     $('#' + key).addClass('inputError');
@@ -146,7 +156,7 @@
                             {
                                 setCookie('JWT', data.JWT, 1);
                                 localStorage.setItem('JWT', data.JWT);
-                                location.href = '/source/edit';
+                                location.href = '/dashboard';
                             }
                         }
                     })

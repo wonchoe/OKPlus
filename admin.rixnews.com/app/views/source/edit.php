@@ -70,7 +70,7 @@
                         <!-- user login dropdown start-->
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" id="dropdownCustom" href="#" aria-expanded="false">
-
+                                <i class="fa fa-user"></i>
                                 <span class="username"><?php echo ucfirst($username);?></span>
 
                             </a>

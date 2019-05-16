@@ -9,6 +9,26 @@ h1, h2, h3 {margin: 0;}
 ul, ol {margin: 0;}
 p {margin: 0;}
 
+.fa-user-silver{
+    color: #414141 !important;
+}
+
+i.fa.fa-globe {
+    font-size: 3em;
+    color:#fff;
+    text-align: left;
+}
+
+i.fa.fa-arrow-up {
+    color: lime;
+    margin-left: 10px;
+}
+
+i.fa.fa-arrow-down {
+    color: red;
+    margin-left: 10px;
+}
+
 
 html, body{
     font-family: 'Roboto', sans-serif;

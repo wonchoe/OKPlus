@@ -1,3 +1,11 @@
+#totalChart {
+/*    width:1300px !important;
+    height: 400px !important;*/
+}
+
+.panel-body{
+    margin: 0 auto;
+}
 
 html {
     background-color: #f2b09a;
@@ -9,10 +17,10 @@ html {
     top: 50%;
 
     position: absolute;
-left: 0;
-right: 0;
-margin-left: auto;
-margin-right: auto;    
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;    
 }
 
 
