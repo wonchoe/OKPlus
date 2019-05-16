@@ -67,13 +67,45 @@ class Analytic {
         }
         return true;
     }
-    
-    public function userGetTotal(int $limit = 100){
-             $dbQuery = $this->db->prepare('SELECT * FROM analytic ORDER BY date DESC LIMIT :limit ');
-             $dbQuery->bindParam(':limit', $limit);
-             $dbQuery->setFetchMode(PDO::FETCH_ASSOC);
-             $dbQuery->execute();
-             echo json_encode($dbQuery->fetchAll());
+
+    private function userGetLastUser() {
+        $dbQuery = $this->db->prepare('SELECT * FROM users_ip ORDER BY lastVisit LIMIT 1');
+        $dbQuery->setFetchMode(PDO::FETCH_ASSOC);
+        $dbQuery->execute();
+        return $dbQuery->fetchAll()[0];
+    }
+
+    public function userGetTotal(int $limit = 100) {
+        $dbQuery = $this->db->prepare('SELECT * FROM analytic ORDER BY date DESC LIMIT :limit ');
+        $dbQuery->bindParam(':limit', $limit);
+        $dbQuery->setFetchMode(PDO::FETCH_ASSOC);
+        $dbQuery->execute();
+        
+        $user = new class {};
+        
+        $result = $dbQuery->fetchAll();
+        foreach($result as $value){
+            $analyticDates[] = $value['date'];
+            $analyticTotal[] = $value['total'];
+            $analyticChrome[] = $value['Chrome'];
+            $analyticYandex[] = $value['YaBrowser'];
+            $analyticAmigo[] = $value['Amigo'];
+        }
+        $user->totalToday = number_format($result[0]['total'], 0, '.', ' ');
+        $user->totalYesterday = number_format($result[1]['total'], 0, '.', ' ');
+        
+        $user->analyticDates = array_reverse($analyticDates);
+        $user->analyticTotal = array_reverse($analyticTotal);
+        $user->analyticChrome = array_reverse($analyticChrome);
+        $user->analyticYandex = array_reverse($analyticYandex);
+        $user->analyticAmigo = array_reverse($analyticAmigo);
+
+        $lastUser = $this->userGetLastUser();
+        $user->lastVisit = $lastUser['lastVisit'];
+        $user->country = $lastUser['country'];
+        $user->city = $lastUser['city'];
+        
+        echo json_encode($user);
     }
 
 }

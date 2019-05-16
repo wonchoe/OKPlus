@@ -95,8 +95,8 @@ class UserController {
                 return;
             }
 
-            echo json_encode(array('JWT' => $this->generateGWT()));
-            //echo user::addUser($username, $email, $password);
+            echo json_encode(array('JWT' => $this->generateGWT($username)));
+            user::addUser($username, $email, $password);
         }
     }
 
