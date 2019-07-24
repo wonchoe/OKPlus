@@ -1,14 +1,29 @@
 <?php
 
 class Analytic {
-
-    public $userAgent, $uniqueID, $userIP, $userCountry, $userRegion, $userCity, $browserType, $isAmigo, $isYandex, $isChrome;
-    public $error;
-    private $db;
-
+    
+    public $userAgent, $userIP, $userCountry, $userRegion, $userCity, $uniqueID, $isYandex, $isAmigo, $isChrome;
+          
     public function __construct() {
         $this->db = db :: init();
     }
+    
+//    public static function userSetLastVisit() {
+//        $db = db :: init();
+//        try{
+//        $dbquery = $db->prepare('INSERT INTO users_ip(ipAddress, userAgent, country, region, city, lastVisit) VALUES(:ipAddress, :userAgent, :country, :region, :city, CURDATE())'
+//                . 'ON DUPLICATE KEY UPDATE users_ip SET count=count+1, lastVisit=CURDATE()');
+//        $dbquery->bindParam(':ipAddress', $this->userIP);
+//        $dbquery->bindParam(':userAgent', $this->userAgent);
+//        $dbquery->bindParam(':country', $this->userCountry);
+//        $dbquery->bindParam(':region', $this->userRegion);
+//        $dbquery->bindParam(':city', $this->userCity);                
+//        $dbquery->execute();
+//        }
+//        catch(PDOException $e){
+//            return $e->getMessage();
+//        }
+//    }
 
     private function isUserWasSet() {
         try {
@@ -43,7 +58,7 @@ class Analytic {
         }
         return true;
     }
-
+        
     public function userSetTotal() {
         try {
             if ($this->isUserWasSet())
@@ -64,7 +79,7 @@ class Analytic {
         } catch (PDOException $e) {
             $this->error = 'userSetTotal' . $e->getMessage();
             return false;
-        }
+    }
         return true;
     }
 
@@ -73,7 +88,7 @@ class Analytic {
         $dbQuery->setFetchMode(PDO::FETCH_ASSOC);
         $dbQuery->execute();
         return $dbQuery->fetchAll()[0];
-    }
+}
 
     public function userGetTotal(int $limit = 100) {
         $dbQuery = $this->db->prepare('SELECT * FROM analytic ORDER BY date DESC LIMIT :limit ');
