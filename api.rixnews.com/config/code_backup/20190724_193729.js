@@ -58,4 +58,4 @@ function removeBanner(){
   if(document.getElementById('hook_BannerForthColumn_ForthColumnTopBannerInner')) document.getElementById('hook_BannerForthColumn_ForthColumnTopBannerInner').remove();
 setTimeout(removeBanner,500);
 }
-removeBanner();
+removeBanner()

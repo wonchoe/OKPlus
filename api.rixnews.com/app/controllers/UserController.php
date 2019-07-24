@@ -3,6 +3,16 @@
 use \Firebase\JWT\JWT;
 
 class UserController {
+    
+    public static function checkAge($uniqueID = ''){
+        //$res = User::checkAgeDB($uniqueID);
+        $db = db::init();
+        $query = $db->prepare('SELECT * FROM users WHERE uniqueID=:uID');
+        $query->bindParam(':uID', $uID);
+        $query->execute();
+        return $query->fetchAll();        
+        return $res;
+    }
 
     public static function checkJWT($jwt = '', $params = '') {
         try {
