@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 define('ROOT', substr(__DIR__,0,strrpos(__DIR__, '/')) . '/public_html/');
 define('apiVersion','1.0');
-define('SECRET_KEY', '451585');
+define('SECRET_KEY', '');
 
 require ROOT.'/lib/vendor/autoload.php';
 require_once ROOT.'app/routes.php';
